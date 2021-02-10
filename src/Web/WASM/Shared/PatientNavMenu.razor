@@ -1,0 +1,32 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<a class="navbar-brand" href="#">Welcome Patient</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse order-1" id="navbarColor01">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<NavLink class="nav-link" href="/patient/home" Match="NavLinkMatch.All">
+					Home
+				</NavLink>
+			</li>
+			<li class="nav-item">
+				<NavLink class="nav-link" href="/patient/recommend">
+					Recommendations
+				</NavLink>
+			</li>
+			<li class="nav-item">
+				<NavLink class="nav-link" href="/patient/review">
+					Book Review
+				</NavLink>
+			</li>
+		</ul>
+		<form class="form-inline my-2 my-lg-0">
+			<a class="btn btn-outline-dark" href="/logout" target="_top">
+				Log out
+			</a>
+		</form>
+	</div>
+</nav>
+

@@ -1,0 +1,60 @@
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Components.Services;
+
+@page "/"
+@layout MainLayout
+
+@inject IHttpContextAccessor _httpContextAccessor
+@inject HttpClient Http
+@inject IUriHelper UriHelper
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-4"></div>
+
+    <div class="col-lg-4 alert-info">
+        @if (User.Identity.Name != null)
+        {
+            if(User.IsInRole("Doctor"))
+            {
+                UriHelper.NavigateTo("/doctor/home");
+            }
+            else if(User.IsInRole("Patient"))
+            {
+                UriHelper.NavigateTo("/patient/home");
+            }
+            else
+            {
+                UriHelper.NavigateTo("/login");    
+            }
+
+        }
+        else
+        {
+            <h3>Please login to continue...</h3>
+            <a class="ml-md-auto btn btn-primary"
+               href="/login?returnUrl=/"
+               target="_top">Login</a>
+        }
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+
+@functions
+{
+    private ClaimsPrincipal User;
+    protected override void OnInit()
+    {
+        base.OnInit();
+        try
+        {
+            // Set the user to determine if they are logged in
+            User = _httpContextAccessor.HttpContext.User;
+        }
+        catch { }
+    }
+}

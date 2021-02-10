@@ -1,0 +1,44 @@
+﻿@page "/doctor/form/{formId}"
+
+@inherits FormDetailsComponent
+
+@using ClinicAnywhere.WASM.Models
+
+@if (formInfo != null)
+{
+	<h5>Form View for @formInfo.Form.FormName</h5>
+
+	<div class="row">
+		<div class="col">
+			Fields : @formInfo.Form.NumberOfFields
+		</div>
+		<div class="col">
+			Active @(formInfo.Form.IsActive ? "YES" : "NO")
+		</div>
+	</div>
+
+	<div class="row">
+		<h5>Fields</h5>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Label</th>
+					<th scope="col">Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (SchemaInfoModel s in formInfo.Schemas.OrderBy(x => x.FieldOrder))
+				{
+					<tr>
+						<td>@s.FieldOrder</td>
+						<td><a>@s.FieldName</a></td>
+						<td>@s.FieldLabel</td>
+						<td>@s.FieldType</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}

@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Doctor Home";
+
+    var user = ViewBag.User;
+}
+
+
+<h2>Please wait while we load your user profile</h2>
+<form asp-action="Start" id="start"></form>
+
+<script type="text/javascript">
+    var ls;
+    ls = sessionStorage;
+    ls.setItem("data", JSON.stringify(@Json.Serialize(user)));
+    setTimeout('document.getElementById("start").submit()', 1000);
+</script>

@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@model DoctorAssist.Web.Models.LoginViewModel
+
+<div class="row">
+    <div class="col-lg-4"></div>
+
+    <div class="col-lg-4 alert-info">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+
+                <div class="form-group centerlook">
+                    <h1> Login </h1>
+                </div>
+                <div class="form-group centerlook">
+                    <label>User Name: </label>
+                    <input asp-for="UserName" type="text" class="form-control" required />
+                </div>
+                <div class="form-group centerlook">
+                    <label>Password:</label>
+                    <input asp-for="Password" type="password" class="form-control" required />
+                </div>
+                <div class="form-group error">
+                    @if (@ViewBag.Failedcount != null)
+                    {
+
+                        <label> Login failed for user: @ViewBag.Failedcount</label>
+                    }
+
+                    @if (@ViewBag.NotValidUser != null)
+                    {
+
+                        <label> @ViewBag.NotValidUser</label>
+                    }
+                </div>
+                <div class="loginbtn">
+
+                    <input type="submit" value="Login" class="btn btn-primary" />
+
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-lg-4"></div>
+</div>

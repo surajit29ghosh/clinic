@@ -1,0 +1,33 @@
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+
+@page "/login"
+@inject IHttpContextAccessor _httpContextAccessor
+@inject HttpClient Http
+
+@if (User.Identity.Name != null)
+{
+    <b>You are logged in as: @User.Identity.Name</b>
+    <a class="ml-md-auto btn btn-primary"
+       href="/logout?returnUrl=/"
+       target="_top">Logout</a>
+}
+else
+{
+    <a class="ml-md-auto btn btn-primary"
+       href="/login?returnUrl=/"
+       target="_top">Login</a>
+}
+@functions {
+    private ClaimsPrincipal User;
+    protected override void OnInit()
+    {
+        base.OnInit();
+        try
+        {
+            // Set the user to determine if they are logged in
+            User = _httpContextAccessor.HttpContext.User;
+        }
+        catch { }
+    }
+}

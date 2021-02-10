@@ -1,0 +1,33 @@
+﻿@page "/doctor/forms"
+
+@inherits FormsComponent
+
+@using ClinicAnywhere.WASM.Models
+
+<h3>Forms</h3>
+
+<div class="row">
+	@if (forms != null)
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Fields</th>
+					<th scope="col">Active</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (FormInfoModel f in forms)
+				{
+					<tr>
+						<td><a href="/doctor/form/@f.FormId">@f.FormName</a></td>
+						<td>@f.NumberOfFields</td>
+						<td>@(f.IsActive ? "YES" : "NO")</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+
+</div>

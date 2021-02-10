@@ -1,0 +1,54 @@
+﻿@page "/doctor/patient/{patientId}"
+
+@inherits PatientComponent
+
+@using ClinicAnywhere.WASM.Models
+
+@if (patientDetails != null)
+{
+	<h3>Details of @patientDetails.PatientName</h3>
+
+	<div class="row">
+		<div class="col">
+			Email is @patientDetails.PatientEmail
+		</div>
+		<div class="col">
+			Phone number is @patientDetails.PatientPhone
+		</div>
+		<div class="col">
+			Age is @patientDetails.PatientAge
+		</div>
+		<div class="col">
+			Gender @patientDetails.PatientGender
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-3">
+			<h5>Visits</h5>
+			@if (patientDetails.Visits != null)
+			{
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Visited On</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (VisitModel v in patientDetails.Visits)
+						{
+							<tr>
+								<td><a @onclick="@(e => this.LoadFormsOfVisit(v.VisitId.ToString()))"></a>@v.VisitDate.ToString("dd-MMM-yyyy") @v.VisitTime</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			}
+		</div>
+		<div class="col-1"></div>
+		<div class="col-8">
+			<h5>Forms</h5>
+		</div>
+	</div>
+}
+

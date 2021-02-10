@@ -1,0 +1,33 @@
+﻿@page "/"
+
+@using ClinicAnywhere.WASM.Managers;
+
+@inject IAppUserContext userContext; 
+
+<a href="/doctor/home" @onclick="@(e => { this.SetDoctorContext(); })">Doctor Login</a>
+<br />
+<a href="/patient/home" @onclick="@(e => { this.SetPatientContext(); })">Patient Login</a>
+
+@code {
+	private bool SetDoctorContext()
+	{
+		userContext.DoctorId = "24A49942-8E38-419B-88AA-2161EB9F7804";
+		userContext.UserIsDoctor = true;
+		userContext.UserIsPatient = false;
+		userContext.PatientId = string.Empty;
+		userContext.UserRole = "Doctor";
+
+		return true;
+	}
+
+	private bool SetPatientContext()
+	{
+		userContext.DoctorId = string.Empty;
+		userContext.UserIsDoctor = false;
+		userContext.UserIsPatient = true;
+		userContext.PatientId = "";
+		userContext.UserRole = "Patient";
+
+		return true;
+	}
+}

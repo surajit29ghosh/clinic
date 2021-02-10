@@ -1,0 +1,5 @@
+dotnet ef dbcontext scaffold "Server=SGHOSH-LTP;Database=Clinic.Data;User=sa;Password=sa123;" Microsoft.EntityFrameworkCore.SqlServer -o Model --context-dir Infrastructure -c MasterdataContext -t DoctorInfo -t PatientInfo -t VisitInfo -f
+
+dotnet ef dbcontext scaffold "Server=SGHOSH-LTP;Database=Clinic.Data;User=sa;Password=sa123;" Microsoft.EntityFrameworkCore.SqlServer -o Model --context-dir Infrastructure -c VisitContext -t VisitInfo
+
+dotnet ef dbcontext scaffold "Server=SGHOSH-LTP;Database=Clinic.Data;User=sa;Password=sa123;" Microsoft.EntityFrameworkCore.SqlServer -o Model --context-dir Infrastructure -c FormContext -t FormInfo -t SchemaInfo -t FormData

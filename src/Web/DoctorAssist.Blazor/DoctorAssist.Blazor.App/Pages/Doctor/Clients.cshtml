@@ -1,0 +1,246 @@
+@page "/doctor/clients"
+@using  DoctorAssist.Blazor.App.Services
+
+@inject HttpClient Http
+
+@functions
+{
+    public string Term { get; set; }
+
+    public string currentTab = "upcoming";
+
+    public List<PatientBasicList> searchList;
+    public List<PatientBasicList> upcomingList;
+    public List<PatientBasicList> frequentList;
+    public List<PatientBasicList> recentList;
+
+    public string UpcomingStyle
+    {
+        get
+        {
+            if (currentTab == "upcoming")
+                return "is-active";
+            else
+                return "";
+        }
+    }
+
+    public string RecentStyle
+    {
+        get
+        {
+            if (currentTab == "recent")
+                return "is-active";
+            else
+                return "";
+        }
+    }
+
+    public string FrequentStyle
+    {
+        get
+        {
+            if (currentTab == "frequent")
+                return "is-active";
+            else
+                return "";
+        }
+    }
+
+    public string UpcomingActive
+    {
+        get
+        {
+            if (currentTab == "upcoming")
+                return "display: block";
+            else
+                return "display: none";
+        }
+    }
+
+    public string RecentActive
+    {
+        get
+        {
+            if (currentTab == "recent")
+                return "display: block";
+            else
+                return "display: none";
+        }
+    }
+
+    public string FrequentActive
+    {
+        get
+        {
+            if (currentTab == "frequent")
+                return "display: block";
+            else
+                return "display: none";
+        }
+    }
+
+
+
+    void search(UIKeyboardEventArgs eventArgs)
+    {
+        if(eventArgs.Key == "Enter")
+        {
+            searchList = new List<PatientBasicList>();
+        }
+    }
+
+    protected override async Task OnInitAsync()
+    {
+        //Http.Get
+        upcomingList = new List<PatientBasicList>();
+        recentList = new List<PatientBasicList>();
+        frequentList = new List<PatientBasicList>();
+    }
+}
+
+<section class="section">
+        <div class="container column is-10">
+            <div class="section">
+                <h1 class="title is-primary">Clients</h1>
+
+                <div class="card">
+                    <div class="card-header">
+                        <p class="card-header-title">Search</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="field">
+                            <p class="control has-icons-right">
+                                <input class="input" type="text" placeholder="type any value and hit enter to search..." onkeyup="@search" bind="Term" />
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </p>
+                        </div>
+                        @if (searchList != null)
+                        {
+                        <table class="table is-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Select</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in searchList)
+                                {
+                                <tr>
+                                    <td>@item.PatientName</td>
+                                    <td>@item.PatientEmail</td>
+                                    <td>@item.PatientPhone</td>
+                                    <td><NavLink href=@string.Format("/profile/summary/{0}", item.PatientId.ToString()) Match="NavLinkMatch.All" /></td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        }
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <p class="card-header-title">Quick Access</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tabs">
+                            <ul>
+                                <li class="@UpcomingStyle">
+                                    <a onclick="@((e) => currentTab = "upcoming")">Upcoming</a>
+                                </li>
+                                <li class="@FrequentStyle">
+                                <a onclick="@((e) => currentTab = "frequent")">Frequent</a>
+                                </li>
+                                <li class="@RecentStyle">
+                                <a onclick="@((e) => currentTab = "recent")">Recent</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="box" style="@UpcomingActive">
+                            <h3>Upcoming</h3>
+                            <table class="table is-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+										<th>Scheduled On</th>
+                                        <th>Select</th>
+                                    </tr>
+                                </thead>
+								<tbody>
+                                    @foreach(var item in upcomingList)
+                                    {
+                                    <tr>
+                                        <td>@item.PatientName</td>
+                                        <td>@item.PatientEmail</td>
+                                        <td>@item.PatientPhone</td>
+                                        <td>@item.FormattedDate @item.VisitTime</td>
+                                        <td><NavLink href=@string.Format("/profile/summary/{0}", item.PatientId.ToString()) Match="NavLinkMatch.All" /></td>
+                                    </tr>
+                                    }
+								</tbody>
+                            </table>
+                        </div>
+                        <div class="box" style="@FrequentActive">
+                            <h3>Frequent</h3>
+                            <table class="table is-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Select</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in frequentList)
+                                    {
+                                        <tr>
+                                            <td>@item.PatientName</td>
+                                            <td>@item.PatientEmail</td>
+                                            <td>@item.PatientPhone</td>
+                                            <td><NavLink href=@string.Format("/profile/summary/{0}", item.PatientId.ToString()) Match="NavLinkMatch.All" /></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="box" style="@RecentActive">
+                            <h3>Recent</h3>
+                            <table class="table is-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+										<th>Last visited</th>
+                                        <th>Select</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in recentList)
+                                    {
+                                        <tr>
+                                            <td>@item.PatientName</td>
+                                            <td>@item.PatientEmail</td>
+                                            <td>@item.PatientPhone</td>
+                                            <td>@item.FormattedDate @item.VisitTime</td>
+                                            <td><NavLink href=@string.Format("/profile/summary/{0}", item.PatientId.ToString()) Match="NavLinkMatch.All" /></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,51 @@
+﻿@page "/doctor/home"
+
+@inherits HomeComponent
+
+@using ClinicAnywhere.WASM.Models;
+
+<h3>Home</h3>
+
+@if (doctorDetails != null)
+{
+	<h5>Welcome Doctor @doctorDetails.DoctorName</h5>
+
+	<div class="row">
+		<div class="col">
+			Your Email is @doctorDetails.DoctorEmail
+		</div>
+		<div class="col">
+			Your Phone number is @doctorDetails.DoctorPhone
+		</div>
+	</div>
+}
+else
+{
+	<div class="row">
+		<div class="col">Loading...</div>
+	</div>
+}
+
+@if (patientList != null)
+{
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Phone</th>
+			<th scope="col">Last Visited</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (PatientModel p in patientList)
+		{
+			<tr>
+				<td><a href="/doctor/patient/@p.PatientId">@p.PatientName</a></td>
+				<td>@p.PatientPhone</td>
+				<td>@p.LastVisitDate.ToLongDateString()</td>
+			</tr>
+		}
+	</tbody>
+</table>
+}
+

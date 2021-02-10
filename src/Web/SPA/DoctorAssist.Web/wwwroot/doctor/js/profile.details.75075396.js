@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["profile.details"],{"33e0":function(e,n,t){"use strict";t.r(n);var l=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("h1",[e._v("Basic Info")])},i=[],s=t("2877"),o={},a=Object(s["a"])(o,l,i,!1,null,null,null);a.options.__file="Details.vue";n["default"]=a.exports}}]);
+//# sourceMappingURL=profile.details.75075396.js.map

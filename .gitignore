@@ -1,0 +1,8 @@
+
+*.dll
+*.hash
+**/*.suo
+*.v2
+bin
+obj
+.vs

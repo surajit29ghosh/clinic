@@ -1,0 +1,38 @@
+﻿<nav class="navbar is-primary shadow" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+            <img src="~/logo.png" width="112" height="28" />
+            Demo - Doctor
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbar" class="navbar-menu">
+        <div class="navbar-start">
+            <NavLink class="navbar-item" href="/doctor/home" Match="NavLinkMatch.All">
+                Home
+            </NavLink>
+            <NavLink class="navbar-item" href="/doctor/clients">
+                Clients
+            </NavLink>
+        </div>
+
+        <div class="navbar-end">
+            <NavLink class="navbar-item" href="/doctor/manage">
+                Manage
+            </NavLink>
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-dark" href="/logout" target="_top">
+                        Log out
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
